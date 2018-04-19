@@ -82,15 +82,16 @@
 #########################
 
 #########################
-import sys
-sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
-
+from subprocess import call
 import os
 import time
 import signal
 import sys
 import RPi.GPIO as GPIO
 import datetime
+
+sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
+
 
 #########################
 sleepTime = 30	# Time to sleep between checking the temperature
@@ -156,7 +157,7 @@ class Temperature(object):
         #   Maximum operating temperature of Raspberry Pi 3 is 85C
         #   CPU performance is throttled at 82C
         #   running a CPU at lower temperatures will prolong its life
-        self.startTemperature = 60.0
+        self.startTemperature = 50.0
 
         # Wait until the temperature is M degrees under the Max before shutting off
         self.stopTemperature = self.startTemperature - 5.0
@@ -166,8 +167,10 @@ class Temperature(object):
 
     def getTemperature(self):
         # need to specify path for vcgencmd
-        res = os.popen('/opt/vc/bin/vcgencmd measure_temp').readline()
-        self.cpuTemperature = float((res.replace("temp=","").replace("'C\n","")))
+        #res = os.popen('/opt/vc/bin/vcgencmd measure_temp').readline()
+        tempRead = open('/sys/class/thermal/thermal_zone0/temp').read();
+        self.cpuTemperature = float(tempRead)/1000
+        #self.cpuTemperature = float((res.replace("temp=","").replace("'C\n","")))
 
     # Using the CPU's temperature, turn the fan on or off
     def checkTemperature(self, myFan, myPin):
