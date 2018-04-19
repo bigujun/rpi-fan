@@ -82,6 +82,10 @@
 #########################
 
 #########################
+
+import sys
+sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
+
 import os
 import time
 import signal
@@ -89,7 +93,7 @@ import sys
 import RPi.GPIO as GPIO
 import datetime
 
-sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
+
 
 
 #########################
