@@ -82,6 +82,9 @@
 #########################
 
 #########################
+import sys
+sys.path.append('/storage/.kodi/addons/virtual.rpi-tools/lib')
+
 import os
 import time
 import signal
