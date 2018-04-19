@@ -1,18 +1,20 @@
-# rpi-fan
-Raspberry Pi 3 Fan 
+#Automatic Fan Control for RPi LibreElec 
+this is a fork from: https://github.com/dumbo25/rpi-fan
+with some changes to run on LibreElec
 
-run-fan.py turns a fan on when CPU temperature exceeds a start temperature, and shuts the fan off when the temperature is below a stop temperature.
+How to use SSH on libreelec:
+https://wiki.libreelec.tv/accessing_libreelec
 
-Any fan can be used. The fan's description/specifications should be:
-  operates at 3.3V or operates in a range that includes 3.3V
-  silent
-  brushless
+#Commands
+```
+cd /storage
+wget "https://raw.githubusercontent.com/bigujun/rpi-fan/master/run-fan.py"
+nano /storage/.config/autostart.sh
+```
 
-The fan I used came with a MiuZei case.
 
-run-fan was tested on a raspberry pi running kodi on osmc using a 3.3v. However, it can be used on any Raspberry Pi by changing the service to use the correct username and copy run-fan.py to /home/username, instead of /home/osmc
+Add this line to the file autostart.sh and save it ( press ctrl+O )
 
-There is an instructable that describes the setup in detail (link needs to be added)
-
-run-fan.service should be copied to here: /lib/systemd/system/run-fan.service
-run-fan.py should be copied to here: /home/osmc/run-fan.py
+```
+python /storage/run-fan.py &
+```
